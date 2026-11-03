@@ -1,0 +1,10 @@
+{
+  "description": "Analiza ventas, inventario, tráfico y conversión para centros comerciales y cadenas retail en Colombia, con paneles e integraciones para tomar mejores decisiones.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
