@@ -1,0 +1,43 @@
+name: retail-intelligence
+
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: runtime
+      args:
+        FIGMA_PUBLIC_URL: ${FIGMA_PUBLIC_URL:-}
+    image: retail-intelligence:latest
+    env_file: .env
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:8080/healthz"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+  dev:
+    profiles: [dev]
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      target: dev
+    env_file: .env
+    environment:
+      PORT: "8443"
+    ports:
+      - "${DEV_PORT:-8443}:8443"
+    volumes:
+      - ../src:/app/src
+      - ../public:/app/public
+      - ../index.html:/app/index.html

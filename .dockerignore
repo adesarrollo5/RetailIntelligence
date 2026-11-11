@@ -1,0 +1,30 @@
+# VCS / deps / build output
+.git
+.gitignore
+.gitattributes
+node_modules
+dist
+build
+.cache
+.vite
+*.tsbuildinfo
+*.log
+logs
+
+# Env files (never in the image)
+.env*
+docker/.env*
+
+# Agent / tooling state
+.agents
+.claude
+.serena
+.opencode-skills
+.plugins
+skills-lock.json
+AGENTS.md
+CLAUDE.md
+
+# Figma: only site.json is needed by vite.config.ts
+.figma/**
+!.figma/make/site.json
